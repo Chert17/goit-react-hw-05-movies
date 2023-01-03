@@ -11,19 +11,22 @@ export function SearchMoviesList({ query }) {
       if (!query) return;
 
       const data = await fetchMoviesByQuery(query);
-      console.log(data);
 
       setMovies(data);
     }
 
     fetchData(query);
-  }, [query]);
+  }, [movies.length, query]);
+
+  if (!movies.length) return <p>Not found</p>;
 
   return (
     <>
       <MoviesList>
-        {movies.map(item => (
-          <MoviesItem key={item.id}>{item.title}</MoviesItem>
+        {movies.map(({ id, title }) => (
+          <MoviesItem to={`/movies/${id}`} key={id}>
+            {title}
+          </MoviesItem>
         ))}
       </MoviesList>
     </>

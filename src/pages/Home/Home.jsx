@@ -16,15 +16,17 @@ export function Home() {
     fetchData();
   }, []);
 
+  if (!movies.length) return;
+
   return (
     <>
-      <main>
-        <MoviesList>
-          {movies.map(item => (
-            <MoviesItem key={item.id}>{item.title}</MoviesItem>
-          ))}
-        </MoviesList>
-      </main>
+      <MoviesList>
+        {movies.map(({ id, title }) => (
+          <MoviesItem to={`/movies/${id}`} key={id}>
+            {title}
+          </MoviesItem>
+        ))}
+      </MoviesList>
     </>
   );
 }
