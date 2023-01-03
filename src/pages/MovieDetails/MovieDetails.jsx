@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from 'service/movieApi';
 
 import { NavItem } from 'components/AppBar/AppBar.styled';
 
 export function MovieDetails() {
   const { movieId } = useParams();
+  const location = useLocation();
+  const href = location.state?.from || '/movies';
 
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(null);
 
   useEffect(() => {
     async function fetchData(id) {
@@ -21,16 +23,22 @@ export function MovieDetails() {
 
   if (!movie) return;
 
-  const { poster_path, title, vote_average, overview } = movie;
+  const { poster_path, title, vote_average, overview, genres } = movie;
 
   return (
     <>
-      <img src={poster_path} alt={title} />
+      <Link to={href}>Go back</Link>
+      <img src={`https://image.tmdb.org/t/p/w92${poster_path}`} alt={title} />
       <h2>{title}</h2>
       <p>{vote_average}</p>
       <h3>Overview</h3>
       <p>{overview}</p>
       <h4>Genres</h4>
+      <ul>
+        {genres.map(({ id, name }) => (
+          <li key={id}>{name}</li>
+        ))}
+      </ul>
       <hr />
       <ul>
         <li>
@@ -40,7 +48,9 @@ export function MovieDetails() {
           <NavItem to={'reviews'}>Reviews</NavItem>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<p>Loading ...</p>}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }

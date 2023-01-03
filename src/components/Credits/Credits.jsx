@@ -17,7 +17,7 @@ export function Credits() {
     fetchData(movieId);
   }, [movieId]);
 
-  if (!credits.length) return <p>Not found</p>;
+  if (!credits.length) return;
 
   return (
     <>
@@ -25,7 +25,12 @@ export function Credits() {
         {credits.map(({ name, profile_path, character, id }) => (
           <li key={id}>
             <div>
-              <img src={profile_path} alt={name} />
+              {profile_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w92${profile_path}`}
+                  alt={name}
+                />
+              )}
             </div>
             <p>{name}</p>
             <p>Character: {character}</p>

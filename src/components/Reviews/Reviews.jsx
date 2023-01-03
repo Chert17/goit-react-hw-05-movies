@@ -17,7 +17,7 @@ export function Reviews() {
     fetchData(movieId);
   }, [movieId]);
 
-  if (!reviews.length) return <p>Not found</p>;
+  if (!reviews.length) return;
 
   return (
     <>

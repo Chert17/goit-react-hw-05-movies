@@ -1,16 +1,20 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { SearchMoviesList } from 'components/SearchMoviesList/SearchMoviesList';
+import { useSearchParams } from 'react-router-dom';
 
 export function Movies() {
-  const [query, setQuery] = useState('');
+  // const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query') ?? '';
 
   function filterMovies(e) {
-    setQuery(e.target.value.toLowerCase().trim());
+    // setQuery(e.target.value.toLowerCase().trim());
+    setSearchParams({ query: e.target.value.toLowerCase().trim() });
   }
 
   function onSubmit(e) {
     e.preventDefault();
-    setQuery('');
+    // setQuery('');
   }
 
   return (
@@ -25,7 +29,6 @@ export function Movies() {
             autoFocus={true}
           />
         </label>
-        <button type="submit">Search</button>
       </form>
       <SearchMoviesList query={query} />
     </>
