@@ -1,25 +1,18 @@
-// import { useState } from 'react';
-import { SearchMoviesList } from 'components/SearchMoviesList/SearchMoviesList';
+import { SearchMoviesList } from 'components/MovieList/SearchMovieList';
 import { useSearchParams } from 'react-router-dom';
 
-export function Movies() {
-  // const [query, setQuery] = useState('');
+export function MoviesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
 
   function filterMovies(e) {
-    // setQuery(e.target.value.toLowerCase().trim());
-    setSearchParams({ query: e.target.value.toLowerCase().trim() });
-  }
-
-  function onSubmit(e) {
-    e.preventDefault();
-    // setQuery('');
+    const value = e.target.value.toLowerCase().trim();
+    setSearchParams(value !== '' ? { query: value } : {});
   }
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form>
         <label>
           <input
             onChange={filterMovies}

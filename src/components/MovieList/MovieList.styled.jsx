@@ -10,7 +10,6 @@ export const MoviesList = styled.ul`
 export const MoviesItem = styled(Link)`
   text-decoration: none;
   color: black;
-
   &:hover,
   &:focus {
     color: orange;

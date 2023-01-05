@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { fetchMoviesByQuery } from 'service/movieApi';
+import { fetchMoviesByQuery } from '../../service/movieApi';
 
-import { MoviesList, MoviesItem } from '../../pages/Home/Home.styled';
+import { MoviesList, MoviesItem } from './MovieList.styled';
 
 export function SearchMoviesList({ query }) {
   const [movies, setMovies] = useState([]);

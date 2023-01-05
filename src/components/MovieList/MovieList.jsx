@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getMovies } from 'service/movieApi';
+import { getMovies } from '../../service/movieApi';
 
-import { MoviesList, MoviesItem } from './Home.styled';
+import { MoviesList, MoviesItem } from './MovieList.styled';
 
-export function Home() {
+export function MovieList() {
   const [movies, setMovies] = useState([]);
   const location = useLocation();
 

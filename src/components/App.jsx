@@ -1,18 +1,29 @@
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { AppBar } from './AppBar/AppBar';
-// import { Home } from 'pages/Home/Home';
-// import { Movies } from 'pages/Movies/Movies';
-// import { MovieDetails } from 'pages/MovieDetails/MovieDetails';
-// import { Credits } from './Credits/Credits';
-// import { Reviews } from './Reviews/Reviews';
-import { Suspense, lazy } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { lazy } from 'react';
 
-const Home = lazy(() =>
-  import('../pages/Home/Home').then(module => ({ default: module.Home }))
+// import { Layout } from './Layout/Layout';
+// import { HomePage } from 'pages/HomePage/HomePage';
+// import { MoviePage } from 'pages/MoviePage/MoviePage';
+// import { MovieDetails } from 'pages/MovieDetails/MovieDetails';
+// import { Cast } from './Cast/Cast';
+// import { Reviews } from './Reviews/Reviews';
+
+const Layout = lazy(() =>
+  import('../components/Layout/Layout').then(module => ({
+    default: module.Layout,
+  }))
 );
 
-const Movies = lazy(() =>
-  import('../pages/Movies/Movies').then(module => ({ default: module.Movies }))
+const HomePage = lazy(() =>
+  import('../pages/HomePage/HomePage').then(module => ({
+    default: module.HomePage,
+  }))
+);
+
+const MoviesPage = lazy(() =>
+  import('../pages/MoviesPage/MoviesPage').then(module => ({
+    default: module.MoviesPage,
+  }))
 );
 
 const MovieDetails = lazy(() =>
@@ -21,33 +32,27 @@ const MovieDetails = lazy(() =>
   }))
 );
 
-const Credits = lazy(() =>
-  import('./Credits/Credits').then(module => ({ default: module.Credits }))
+const Cast = lazy(() =>
+  import('../components/Cast/Cast').then(module => ({ default: module.Cast }))
 );
 
 const Reviews = lazy(() =>
-  import('./Reviews/Reviews').then(module => ({ default: module.Reviews }))
+  import('../components/Reviews/Reviews').then(module => ({
+    default: module.Reviews,
+  }))
 );
 
 export const App = () => {
   return (
     <>
-      <AppBar />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Suspense>
-              <Outlet />
-            </Suspense>
-          }
-        >
+        <Route path="/" element={<Layout />}>
           <Route index element={<Navigate to={'home'} />} />
-          <Route path="home" element={<Home />}></Route>
-          <Route path="movies" element={<Movies />}></Route>
+          <Route path="home" element={<HomePage />} />
+          <Route path="movies" element={<MoviesPage />} />
           <Route path="movies/:movieId" element={<MovieDetails />}>
-            <Route path="credits" element={<Credits />}></Route>
-            <Route path="reviews" element={<Reviews />}></Route>
+            <Route path="credits" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
       </Routes>

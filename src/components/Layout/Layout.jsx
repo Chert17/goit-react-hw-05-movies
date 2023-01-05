@@ -1,11 +1,11 @@
-import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import { AppBar } from 'components/AppBar/AppBar';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
-export function MovieDetails() {
+export function Layout() {
   return (
     <>
-      <MovieInfo />
+      <AppBar />
       <Suspense>
         <Outlet />
       </Suspense>

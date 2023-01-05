@@ -14,11 +14,9 @@ export const NavList = styled.ul`
 export const NavItem = styled(NavLink)`
   text-decoration: none;
   color: black;
-
   &.active {
     color: orange;
   }
-
   &:hover:not(.active),
   &:focus:not(.active) {
     color: orange;

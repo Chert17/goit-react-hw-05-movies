@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { fetchMoviesCredits } from 'service/movieApi';
+import { fetchMoviesCredits } from '../../service/movieApi';
 import { useParams } from 'react-router-dom';
 
-export function Credits() {
-  const [credits, setCredits] = useState([]);
+export function Cast() {
+  const [cast, setCast] = useState([]);
 
   const { movieId } = useParams();
 
@@ -11,18 +11,18 @@ export function Credits() {
     async function fetchData(id) {
       const data = await fetchMoviesCredits(id);
 
-      setCredits(data);
+      setCast(data);
     }
 
     fetchData(movieId);
   }, [movieId]);
 
-  if (!credits.length) return;
+  if (!cast.length) return;
 
   return (
     <>
       <ul>
-        {credits.map(({ name, profile_path, character, id }) => (
+        {cast.map(({ name, profile_path, character, id }) => (
           <li key={id}>
             <div>
               {profile_path && (
