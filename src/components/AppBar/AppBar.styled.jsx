@@ -7,11 +7,13 @@ export const Header = styled.header`
 `;
 
 export const NavList = styled.ul`
+  padding: 0 40px;
   display: flex;
   gap: 10px;
 `;
 
 export const NavItem = styled(NavLink)`
+  padding: 20px;
   text-decoration: none;
   color: black;
   &.active {

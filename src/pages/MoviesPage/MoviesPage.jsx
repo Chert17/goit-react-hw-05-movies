@@ -1,6 +1,9 @@
 import { SearchMoviesList } from 'components/MovieList/SearchMovieList';
 import { useSearchParams } from 'react-router-dom';
 
+import { Input } from '@mui/material';
+import { Label, Form } from './MoviesPage.styled';
+
 export function MoviesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
@@ -12,17 +15,17 @@ export function MoviesPage() {
 
   return (
     <>
-      <form>
-        <label>
-          <input
+      <Form>
+        <Label>
+          <Input
             onChange={filterMovies}
             value={query}
             type="text"
             placeholder="Search movies"
             autoFocus={true}
           />
-        </label>
-      </form>
+        </Label>
+      </Form>
       <SearchMoviesList query={query} />
     </>
   );

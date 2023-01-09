@@ -11,10 +11,8 @@ export function MovieList() {
   useEffect(() => {
     async function fetchData() {
       const data = await getMovies();
-
       setMovies(data);
     }
-
     fetchData();
   }, []);
 

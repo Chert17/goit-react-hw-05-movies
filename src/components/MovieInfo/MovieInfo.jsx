@@ -3,6 +3,7 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { fetchMoviesDetails } from '../../service/movieApi';
 
 import { NavItem } from '../AppBar/AppBar.styled';
+import { Wrraper } from './MovieInfo.styled';
 
 export function MovieInfo() {
   const { movieId } = useParams();
@@ -28,7 +29,12 @@ export function MovieInfo() {
   return (
     <>
       <Link to={href}>Go back</Link>
-      <img src={`https://image.tmdb.org/t/p/w92${poster_path}`} alt={title} />
+      <Wrraper>
+        <img
+          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+          alt={title}
+        />
+      </Wrraper>
       <h2>{title}</h2>
       <p>{vote_average}</p>
       <h3>Overview</h3>
